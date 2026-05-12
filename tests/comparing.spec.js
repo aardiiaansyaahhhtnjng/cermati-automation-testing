@@ -49,7 +49,9 @@ test('Compare more than 3 products', async ({ page }) => {
     await mfPage.enableCompare();
     await mfPage.selectProducts(4);
 
-    await expect(page.getByText('Maksimal 3 reksa dana yang')).toBeVisible();
+    await expect(page.getByText('Maksimal 3 reksa dana yang bisa dipilih.')).toBeVisible();
+
+    await page.screenshot({ path: 'screenshots/comparing/compare-error.png' });
 });
 
 test('Compare without selecting products or only one product', async ({ page }) => {
@@ -74,6 +76,8 @@ test('Compare without selecting products or only one product', async ({ page }) 
         name: 'Bandingkan', 
         exact: true 
     })).toBeDisabled();
+
+    await page.screenshot({ path: 'screenshots/comparing/compare-disabled.png' });
 });
 
 test('filter by return tertinggi', async ({ page }) => {
@@ -83,16 +87,30 @@ test('filter by return tertinggi', async ({ page }) => {
 
     await mfPage.openMutualFund();
 
-    // await mfPage.applySyariahFilter();
+    await mfPage.applySyariahFilter();
 
     // Click return tertinggi
-    await page.getByRole('button', { name: ' Filter' }).click();
+    await page.getByRole('button', { name: ' Urutkan' }).click();
     await page.getByText('Return Tertinggi', { exact: true }).click();
+    await page.getByText('1 Tahun', { exact: true }).click();
     await page.getByRole('button', { name: 'Terapkan' }).click();
 
     // Validate sorting by return tertinggi
-    const firstProductReturn = await page.locator('.product-item-card .return').first().textContent();
-    const secondProductReturn = await page.locator('.product-item-card .return').nth(1).textContent();
+    const firstProductReturn = await page.locator('.product-return').nth(0).textContent();
+    const secondProductReturn = await page.locator('.product-return').nth(1).textContent();
 
-    expect(parseFloat(firstProductReturn)).toBeGreaterThanOrEqual(parseFloat(secondProductReturn));
+    // Remove non-numeric characters and convert to float for comparison
+    const first = firstProductReturn.replace('%', '').replace('+', '').replace('-', '').replace('Return 1 Tahun', '');
+    const second = secondProductReturn.replace('%', '').replace('+', '').replace('-', '').replace('Return 1 Tahun', '');
+
+    console.log('Return produk pertama:', first);
+    console.log('Return produk kedua:', second);
+
+    await expect(parseFloat(first)).toBeGreaterThanOrEqual(parseFloat(second));
+
+    await expect(page.getByRole('heading', { 
+        name: 'Reksa Dana Pasar Uang' 
+    })).toBeVisible();
+
+    await page.screenshot({ path: 'screenshots/comparing/sorted-return.png', fullPage: true });
 });
