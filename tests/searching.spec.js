@@ -4,6 +4,7 @@ import { SearchingBox } from '../object/searching.page';
 test("Search 'BCA' and assert the result", async ({ page }) => {
     // keyword to search, and create instance of SearchingBox
     const keyword = 'BCA';
+    
     const searchingBox = new SearchingBox(page);
 
     await searchingBox.goto();
