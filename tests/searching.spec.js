@@ -9,7 +9,7 @@ test("Search 'BCA' and assert the result", async ({ page }) => {
 
     await searchingBox.goto();
 
-    // 📸 Screenshot homepage
+    // Screenshot homepage
     await page.screenshot({ path: 'screenshots/searching/homepage.png', fullPage: true });
 
     await searchingBox.search(keyword);
@@ -24,6 +24,6 @@ test("Search 'BCA' and assert the result", async ({ page }) => {
 
     expect(totalResult).toBe(semuaTotal);
 
-    // 📸 Screenshot final (passed state)
+    // Screenshot final (passed state)
     await page.screenshot({ path: 'screenshots/searching/final.png', fullPage: true });
 });

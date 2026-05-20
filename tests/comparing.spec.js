@@ -17,7 +17,7 @@ test('Compare 2 Syariah products from Reksa Dana Pasar Uang', async ({ page }) =
 
     await expect(page.locator('.padding-bottom-16')).toBeVisible();
 
-    // 📸 Screenshot final (passed state)
+    // Screenshot final (passed state)
     await page.screenshot({ path: 'screenshots/comparing/reksa-dana.png', fullPage: true });
 
     await mfPage.applySyariahFilter();
@@ -33,7 +33,7 @@ test('Compare 2 Syariah products from Reksa Dana Pasar Uang', async ({ page }) =
     await mfPage.clickCompare();
     await expect(page.locator('.point-legends')).toBeVisible(); 
 
-    // 📸 Screenshot final (passed state)
+    // Screenshot final (passed state)
     await page.screenshot({ path: 'screenshots/comparing/compare-result.png', fullPage: true });
 });
 
@@ -80,7 +80,7 @@ test('Compare without selecting products or only one product', async ({ page }) 
     await page.screenshot({ path: 'screenshots/comparing/compare-disabled.png' });
 });
 
-test('filter by return tertinggi', async ({ page }) => {
+test('Filter by return tertinggi', async ({ page }) => {
     const mfPage = new MutualFundPage(page);
 
     await mfPage.goto();

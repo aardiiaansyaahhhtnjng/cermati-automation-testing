@@ -7,11 +7,11 @@ class MutualFundPage {
     this.mutualFundBtn = page.locator('#mutualFund').getByRole('button', { name: 'Buka' });
     this.pasarUangLink = page.getByRole('link', { name: 'Pasar Uang' });
 
-    this.filterBtn = page.getByRole('button', { name: ' Filter' });
+    this.filterBtn = page.getByRole('button', { name: 'Filter' });
     this.syariahFilter = page.getByText('Syariah', { exact: true });
     this.applyFilter = page.getByRole('button', { name: 'Terapkan' });
 
-    this.compareToggle = page.getByRole('button', { name: ' Bandingkan' });
+    this.compareToggle = page.getByRole('button', { name: 'Bandingkan' });
     this.productCards = page.locator('.product-item-card');
     this.compareBtn = page.getByRole('button', { name: 'Bandingkan', exact: true });
   }

@@ -25,11 +25,6 @@ test('Login with valid credentials', async ({ page }) => {
 
     await expect(page.getByText('Saya bukan robot')).toBeVisible(); 
 
-    // if (await page.getByText('Saya bukan robot').isVisible()) {
-    //     await page.getByRole('checkbox', { name: 'Saya bukan robot' }).check();
-    // } 
-
-
     await expect(page.getByRole('heading', { name: 'Masukkan PIN' })).toBeVisible();
 
 });
